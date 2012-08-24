@@ -19,26 +19,26 @@ def get_description():
     return ""
 
 requires = [
-    'daemon',
+    'mattd.core',
+    'taskw',
 ]
 
 setup(
-    name='mattd.core',
-    version='0.0.1',
-    description="Voice-driven scriptable daemon.  Matt Daemon.",
+    name='mattd.plugins.taskwarrior',
+    version='0.0.3',
+    description="Taskwarrior plugin for mattd",
     long_description = get_description(),
     install_requires=requires,
     url = "http://mattd.rtfd.org/",
     author='Ralph Bean',
     author_email='rbean@redhat.com',
     license='AGPLv3+',
-    packages = ['mattd', 'mattd.core', 'mattd.plugins',],
+    packages = ['mattd', 'mattd.plugins', 'mattd.plugins.taskwarrior'],
     namespace_packages = ['mattd', 'mattd.plugins',],
     include_package_data=True,
     zip_safe=False,
     entry_points="""
-    [console_scripts]
-    mattd = mattd.core.app:main
-    """
-
+    [mattd.plugins]
+    taskwarrior = mattd.plugins.taskwarrior:TaskwarriorPlugin
+    """,
 )
