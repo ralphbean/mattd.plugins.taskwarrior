@@ -61,6 +61,7 @@ class TaskwarriorPlugin(object):
         elif self.state == VALIDATING:
             if phrase == "yes":
                 speak("Adding to DB")
+                # TODO -- uncomment this once its all configurable.
                 #save_to_db(phrase)
                 self.go_idle()
             elif phrase == "no":
