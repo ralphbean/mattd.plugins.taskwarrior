@@ -78,13 +78,14 @@ class TaskwarriorPlugin(object):
             self.go_idle()
         elif self.state == ACCEPTING:
             speak(phrase)
+            self.phrase_to_save = phrase
             time.sleep(0.5)
             speak("Is that correct?")
             self.state_change(VALIDATING)
         elif self.state == VALIDATING:
             if phrase == "yes":
                 speak("Adding to DB")
-                self.save_to_db(phrase)
+                self.save_to_db(self.phrase_to_save)
                 self.go_idle()
             elif phrase == "no":
                 speak("My bad.")
