@@ -18,7 +18,7 @@ Requires:       mattd
 Requires:       espeak
 Requires:       task
 Requires:       python-taskw
-Requires;       python-sh
+Requires:       python-sh
 
 %description
 Taskwarrior plugin for Matt Daemon.  Speak aloud reminders for yourself.
