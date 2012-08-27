@@ -26,7 +26,7 @@ requires = [
 setup(
     name='mattd.plugins.taskwarrior',
     version='0.0.3',
-    description="Taskwarrior plugin for mattd",
+    description="Taskwarrior plugin for Matt Daemon",
     long_description = get_description(),
     install_requires=requires,
     url = "http://mattd.rtfd.org/",
