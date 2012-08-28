@@ -1,7 +1,7 @@
 %global modname mattd.plugins.taskwarrior
 
 Name:           mattd-plugins-taskwarrior
-Version:        0.0.1
+Version:        0.0.5
 Release:        1%{?dist}
 Summary:        Taskwarrior plugin for Matt Daemon
 Group:          Applications/Internet
@@ -12,6 +12,7 @@ Source0:        http://pypi.python.org/packages/source/m/%{modname}/%{modname}-%
 BuildArch:      noarch
 
 BuildRequires:  python-devel
+BuildRequires:  python-setuptools
 BuildRequires:  mattd
 
 Requires:       mattd
@@ -23,8 +24,6 @@ Requires:       python-sh
 %description
 Taskwarrior plugin for Matt Daemon.  Speak aloud reminders for yourself.
 
-For the terminally scatter-brained.
-
 %prep
 %setup -q -n %{modname}-%{version}
 
@@ -35,12 +34,22 @@ For the terminally scatter-brained.
 %{__python} setup.py install -O1 --skip-build \
     --install-data=%{_datadir} --root %{buildroot}
 
+%{__mkdir_p} %{buildroot}%{_datadir}/mattd/taskwarrior
+%{__mkdir_p} %{buildroot}%{_datadir}/mattd/taskwarrior/data
+%{__mkdir_p} %{buildroot}%{_sysconfdir}/mattd.d
+%{__cp} production.ini %{buildroot}%{_sysconfdir}/mattd.d/taskwarrior.ini
+%{__cp} production-taskrc %{buildroot}%{_datadir}/mattd/taskwarrior/taskrc
+
 %files
 %doc README.rst LICENSE
 
-%{python_sitelib}/%{modname}/
+%config(noreplace) %{_sysconfdir}/mattd.d/taskwarrior.ini
+%config(noreplace) %{_datadir}/mattd/taskwarrior/taskrc
+
+%{python_sitelib}/mattd/plugins/taskwarrior
 %{python_sitelib}/%{modname}-%{version}-py*.egg-info/
+%{python_sitelib}/%{modname}-%{version}-py*.pth
 
 %changelog
-* Fri Aug 24 2012 Ralph Bean <rbean@redhat.com> - 0.0.1-1
+* Fri Aug 24 2012 Ralph Bean <rbean@redhat.com> - 0.0.5-1
 - Initial packaging.

@@ -67,6 +67,7 @@ class TaskwarriorPlugin(object):
     def go_idle(self):
         speak("Idling.")
         self.state_change(IDLE)
+        self.app.active_plugin = None
 
     def handle(self, phrase):
         if self.state == IDLE and self.keyphrase in phrase:
